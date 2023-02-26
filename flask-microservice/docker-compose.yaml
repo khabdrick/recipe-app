@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+  flask:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: 'python main.py'
+    ports:
+      - 5005:5005
+    volumes:
+      - .:/app
+    depends_on:
+      - flask_db
+
+  mq:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: 'python -u consumer.py'
+    depends_on:
+      - flask_db
+
+  flask_db:
+    image: postgres:10.3
+    volumes:
+      - db:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=khabdrick1
+      - POSTGRES_PASSWORD=secure-password
+      - POSTGRES_DB=likes
+    ports:
+      - "5433:5433"
+
+
+volumes:
+  db:

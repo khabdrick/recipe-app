@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  django:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: 'python manage.py runserver 0.0.0.0:8001'
+    ports:
+      - 8001:8001
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+
+  mq:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: 'python -u consumer.py'
+    depends_on:
+      - db
+
+  db:
+    image: postgres:10.3
+    volumes:
+      - db:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=khabdrick
+      - POSTGRES_PASSWORD=secure-password
+      - POSTGRES_DB=article
+    ports:
+      - "5445:5445"
+
+volumes:
+  db:
