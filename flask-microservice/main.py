@@ -6,7 +6,7 @@ import requests
 from producer import publish
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = 'postgresql://khabdrick1:secure-password@flask_db/likes'
+app.config["SQLALCHEMY_DATABASE_URI"] = 'postgresql://khabdrick1:secure-password@flask_db/comments'
 
 db = SQLAlchemy(app)
 
