@@ -27,7 +27,7 @@ services:
     environment:
       - POSTGRES_USER=khabdrick1
       - POSTGRES_PASSWORD=secure-password
-      - POSTGRES_DB=likes
+      - POSTGRES_DB=comments
     ports:
       - "5433:5433"
 
