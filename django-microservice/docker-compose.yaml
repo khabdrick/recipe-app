@@ -27,7 +27,7 @@ services:
     environment:
       - POSTGRES_USER=khabdrick
       - POSTGRES_PASSWORD=secure-password
-      - POSTGRES_DB=article
+      - POSTGRES_DB=recipe
     ports:
       - "5445:5445"
 
