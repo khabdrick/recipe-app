@@ -23,7 +23,7 @@ class RecipeView(viewsets.ViewSet):
 
     def update(self, request, pk=None):
         recipe = Recipe.objects.get(id=pk)
-        serializer = RecipeSerializer(instance=recipe, data=request.data)
+        serializer = RecipeSerializer(instance=recipe, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         publish('recipe_updated', serializer.data)
